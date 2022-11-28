@@ -1,12 +1,15 @@
+var todo = document.querySelector(".todo");
+var saveBtn = document.querySelector(".saveBtn");
+
 //Show current date and time in header
 var today = dayjs();
 $('#currentDay').text(today.format('MMM D, YYYY hh : mm A'));
 
 
-// Loop to set colors in blocks according to hour of day
+// Loop to set colors in hour blocks according to hour of day
 function timeLoop(){
   var currentHour = dayjs().hour();
-  for (var i = 0; i<textarea.length; i++){
+  for (var i = 0; i < textarea.length; i++){
     if (i + 8 < currentHour) textarea[i].classList.add("past");
     if (i + 8 == currentHour) textarea[i].classList.add("present");
     if (i + 8 > currentHour) textarea[i].classList.add("future");
@@ -15,6 +18,39 @@ function timeLoop(){
 
 
 
+function saveTasks (){
+  var currentTask = {
+    todo: todo.value,
+  }
+  localStorage.setItem("todo", JSON.stringify(currentTask));
+
+}
+
+function displayTasks(){
+  var pendingTaks = JSON.parse(localStorage.getItem("todo"));
+    pendingTaks.value = pendingTaks;
+}
+
+
+saveBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  saveTasks();
+  displayTasks();
+  });
+
+
+/*
+  localStorage.setItem('todo', todo.value);
+  saveBtn.addEventListener('click', function() {
+    event.preventDefault();
+    let value = localStorage.getItem('todo');
+    todo.value = value;
+  });
+*/
+
+function init (){
+  displayTasks();
+}
 
 
 
@@ -31,11 +67,7 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
