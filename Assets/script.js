@@ -17,16 +17,16 @@ function timeLoop(){
 }
 
 
-// function to save events 
+// function to save events locally
 $(".saveBtn").on("click",function(){
   var text = $(this).siblings("textarea").val();
   var time = $(this).data("hour");
-  var tasks = localStorage.getItem("todo");
-  if(tasks = null){
+  var tasks = JSON.parse(localStorage.getItem("todo"));
+  if(!tasks) {
     tasks = {};
-  }
+  } console.log(text, time)
   tasks[time] = text;
-  localStorage.setItem("todo", JSON.stringify(todo));
+  localStorage.setItem("todo", JSON.stringify(tasks));
 })
 
 
