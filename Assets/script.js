@@ -1,8 +1,17 @@
+//Show current date and time in header
 var today = dayjs();
 $('#currentDay').text(today.format('MMM D, YYYY hh : mm A'));
 
 
-
+// Loop to set colors in blocks according to hour of day
+function timeLoop(){
+  var currentHour = dayjs().hour();
+  for (var i = 0; i<textarea.length; i++){
+    if (i + 8 < currentHour) textarea[i].classList.add("past");
+    if (i + 8 == currentHour) textarea[i].classList.add("present");
+    if (i + 8 > currentHour) textarea[i].classList.add("future");
+  }
+}
 
 
 
