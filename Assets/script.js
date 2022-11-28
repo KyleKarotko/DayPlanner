@@ -1,5 +1,5 @@
 var todo = document.querySelector(".todo");
-var saveBtn = document.querySelector(".saveBtn");
+//var saveBtn = document.querySelector(".saveBtn");
 
 //Show current date and time in header
 var today = dayjs();
@@ -17,36 +17,28 @@ function timeLoop(){
 }
 
 
-
-function saveTasks (){
-  var currentTask = {
-    todo: todo.value,
+// function to save events 
+$(".saveBtn").on("click",function(){
+  var text = $(this).siblings("textarea").val();
+  var time = $(this).data("hour");
+  var tasks = localStorage.getItem("todo");
+  if(tasks = null){
+    tasks = {};
   }
-  localStorage.setItem("todo", JSON.stringify(currentTask));
+  tasks[time] = text;
+  localStorage.setItem("todo", JSON.stringify(todo));
+})
 
-}
 
+
+//function to display saved events from local storage
 function displayTasks(){
-  var pendingTaks = JSON.parse(localStorage.getItem("todo"));
-    pendingTaks.value = pendingTaks;
+  var pendingTasks = JSON.parse(localStorage.getItem("todo"));
+    if (pendingTasks !== null){
+      document.querySelector("todo").textContent = pendingTasks.todo
+    }
 }
 
-
-saveBtn.addEventListener("click", function(event) {
-  event.preventDefault();
-  saveTasks();
-  displayTasks();
-  });
-
-
-/*
-  localStorage.setItem('todo', todo.value);
-  saveBtn.addEventListener('click', function() {
-    event.preventDefault();
-    let value = localStorage.getItem('todo');
-    todo.value = value;
-  });
-*/
 
 function init (){
   displayTasks();
