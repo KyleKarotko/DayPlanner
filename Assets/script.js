@@ -34,9 +34,7 @@ $(".saveBtn").on("click",function(){
 //function to display saved events from local storage
 function displayTasks(){
   var pendingTasks = JSON.parse(localStorage.getItem("todo"));
-    if (pendingTasks !== null){
-      document.querySelector("todo").textContent = pendingTasks.todo
-    }
+   
 }
 
 
